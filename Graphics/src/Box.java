@@ -1,3 +1,7 @@
+/**
+ * @author ewenw
+ * May 10, 2017
+ */
 
 public class Box extends Shape3D{
 	public Box(Point3D origin, float size){
@@ -31,8 +35,6 @@ public class Box extends Shape3D{
 		super.addPoint(new Point3D(size, -size, -size));
 		super.addPoint(new Point3D(size, -size, size));
 		super.addPoint(new Point3D(-size, -size, size));
-		super.addPoint(new Point3D(-size, -size, -size));
-		
+		super.addPoint(new Point3D(-size, -size, -size));	
 	}
-	
 }

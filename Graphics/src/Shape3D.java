@@ -1,11 +1,12 @@
+/**
+ * @author ewenw
+ * May 10, 2017
+ */
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-
-import javax.swing.JComponent;
 
 
 public class Shape3D {
@@ -71,6 +72,7 @@ public class Shape3D {
 			System.out.println(sin_z);
 		}		
 	}
+	
 	public void update(){
 		rotate(Math.toRadians(5), Math.toRadians(5), Math.toRadians(0));	
 		updateProjectedPoints();		

@@ -1,3 +1,7 @@
+/**
+ * @author ewenw
+ * May 10, 2017
+ */
 
 public class Point3D {
 	private double x, y, z;

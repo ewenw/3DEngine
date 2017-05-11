@@ -1,3 +1,8 @@
+/**
+ * @author ewenw
+ * May 10, 2017
+ */
+
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
