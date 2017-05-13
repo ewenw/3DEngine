@@ -1,40 +1,25 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author ewenw
  * May 10, 2017
  */
 
-public class Box extends Shape3D{
-	public Box(Point3D origin, float size){
-		super(origin);
-		// close side
-		super.addPoint(new Point3D(-size, -size, -size));
-		super.addPoint(new Point3D(-size, size, -size));
-		super.addPoint(new Point3D(size, size, -size));
-		super.addPoint(new Point3D(size, -size, -size));
-		// far side
-		super.addPoint(new Point3D(-size, -size, size));
-		super.addPoint(new Point3D(-size, size, size));
-		super.addPoint(new Point3D(size, size, size));
-		super.addPoint(new Point3D(size, -size, size));
-		// left
-		super.addPoint(new Point3D(-size, -size, -size));
-		super.addPoint(new Point3D(-size, size, -size));
-		super.addPoint(new Point3D(-size, size, size));
-		super.addPoint(new Point3D(-size, -size, size));
-		// right
-		super.addPoint(new Point3D(size, -size, -size));
-		super.addPoint(new Point3D(size, size, -size));
-		super.addPoint(new Point3D(size, size, size));
-		super.addPoint(new Point3D(size, -size, size));
-		// top
-		super.addPoint(new Point3D(size, size, -size));
-		super.addPoint(new Point3D(size, size, size));
-		super.addPoint(new Point3D(-size, size, size));
-		super.addPoint(new Point3D(-size, size, -size));
-		// bottom
-		super.addPoint(new Point3D(size, -size, -size));
-		super.addPoint(new Point3D(size, -size, size));
-		super.addPoint(new Point3D(-size, -size, size));
-		super.addPoint(new Point3D(-size, -size, -size));	
+public class Box {
+	private List<Shape3D> shapes;
+	
+	public Box(Point3D origin, float width){
+		shapes = new ArrayList<Shape3D>();
+		
+		shapes.add(new Plane(origin, new Point3D(-width/2, -width/2, -width/2), new Point3D(width/2, -width/2, width/2)));
+		shapes.add(new Plane(origin, new Point3D(-width/2, -width/2, -width/2), new Point3D(width/2, width/2, -width/2)));
+		shapes.add(new Plane(origin, new Point3D(-width/2, -width/2, width/2), new Point3D(width/2, width/2, width/2)));
+		shapes.add(new Plane(origin, new Point3D(width/2, width/2, width/2), new Point3D(-width/2, width/2, -width/2)));
+		
+	}
+	
+	public List<Shape3D> getShapes(){
+		return shapes;		
 	}
 }

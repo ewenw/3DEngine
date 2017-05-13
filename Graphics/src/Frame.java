@@ -3,6 +3,7 @@
  * May 10, 2017
  */
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
@@ -23,15 +24,14 @@ public class Frame extends JPanel {
 	// create test shapes
 	public static void createShapes(){
 		shapes = new ArrayList<Shape3D>();
-		Shape3D box = new Box(new Point3D(200, 200, 0), 50);
-		
+		Box box = new Box(new Point3D(200, 200, 50), 50);
 		Shape3D triangle = new Shape3D(new Point3D(500, 500, 200));
 		triangle.addPoint(new Point3D(-50, -50, 0));
 		triangle.addPoint(new Point3D(-50, 50, 0));
 		triangle.addPoint(new Point3D(50, 50, 0));
-		shapes.add(box);
+		addShapes(box.getShapes());
 		shapes.add(triangle);
-	}
+		}
 	
 	public void moveEye(Point3D p){
 		eye.move(p.x(), p.y(), p.z());
@@ -45,6 +45,7 @@ public class Frame extends JPanel {
 	}
 	
 	public Frame() {
+		this.setBackground(Color.white);
 		JFrame frame = new JFrame();
 		frame.add(this);
         frame.pack();
@@ -68,7 +69,7 @@ public class Frame extends JPanel {
 		this.validate();
 		this.repaint();
 	}
-	protected void paintComponent(Graphics g){		
+	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		for (Shape3D s: shapes)
 		{
@@ -85,4 +86,12 @@ public class Frame extends JPanel {
             }
         });
     }
+    
+    // add append new shapes list into list
+ 	public static void addShapes(List<Shape3D> shapesList){
+ 		for(Shape3D s: shapesList)
+ 		{
+ 			shapes.add(s);
+ 		}
+ 	}
 }

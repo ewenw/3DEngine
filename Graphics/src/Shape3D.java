@@ -3,14 +3,19 @@
  * May 10, 2017
  */
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Polygon;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
 
 
 public class Shape3D {
 	
+	public boolean fill = false;
+	Polygon poly;
 	static Frame frame;
 	private LinkedList<Point3D> points = new LinkedList<Point3D>();
 	Point2D[] points2D;
@@ -68,8 +73,6 @@ public class Shape3D {
 			double x = p.x() * cos_z - p.y() * sin_z;	
 			p.setY(p.y() * cos_z + p.x() * sin_z);
 			p.setX(x);
-			System.out.println(cos_z);
-			System.out.println(sin_z);
 		}		
 	}
 	
@@ -78,20 +81,20 @@ public class Shape3D {
 		updateProjectedPoints();		
 	}
 	
-	protected void draw(Graphics g){	
-		g.setColor(Color.blue);		
+	protected void draw(Graphics g1){	
+		Graphics2D g = (Graphics2D) g1;
+		poly = new Polygon();
 		for (int i = 0; i < points2D.length; i++)
 		{	
 			Point2D p1 = points2D[i];
-	        if(i < points2D.length-1){
-	        	Point2D p2 = points2D[i+1];
-	        	g.drawLine((int)p1.getX(), (int)p1.getY(), (int)p2.getX(), (int)p2.getY());
-	        }
-	        if(i==0){
-	        	Point2D p3 = points2D[points2D.length - 1];
-	        	g.drawLine((int)p1.getX(), (int)p1.getY(), (int)p3.getX(), (int)p3.getY());
-	        }
+	        poly.addPoint((int)p1.getX(), (int)p1.getY());
 		}
+		g.setColor(Color.GRAY);	
+		if (fill)
+			g.fillPolygon(poly);
+		g.setColor(Color.blue);	
+		g.setStroke(new BasicStroke(2));
+		g.drawPolygon(poly);
 	}	
 	
 }
