@@ -14,16 +14,23 @@ import java.util.LinkedList;
 
 public class Shape3D {
 	
-	public boolean fill = false;
+	public boolean fill = true;
 	Polygon poly;
 	static Frame frame;
 	private LinkedList<Point3D> points = new LinkedList<Point3D>();
 	Point2D[] points2D;
 	// center point of shape
 	Point3D origin;
+	public Color fillColor = Color.GRAY;
+	public Color outlineColor = Color.BLACK;
 	
+	public Shape3D(Point3D origin, Color fillColor){
+		this.origin = origin;
+		this.fillColor = fillColor;
+	}
 	public Shape3D(Point3D origin){
 		this.origin = origin;
+		
 	}
 	
 	public void addPoint(Point3D p){
@@ -40,16 +47,14 @@ public class Shape3D {
 		}	
 	}
 	
-	public void calculateOrigin(){
-		double[] c = new double[3];
+	public double zDepth(){
+		double z = 0;
 		for (Point3D p: points)
 		{
-			c[0] += p.x();
-			c[1] += p.y();
-			c[2] += p.z();		
+			z += p.z();	
 		}
 		int n = points.size();
-		origin = new Point3D(c[0] / n, c[1] / n, c[2] / n);
+		return z / n;
 	}
 	
 	public void rotate(double angX, double angY, double angZ){
@@ -77,7 +82,7 @@ public class Shape3D {
 	}
 	
 	public void update(){
-		rotate(Math.toRadians(5), Math.toRadians(5), Math.toRadians(0));	
+		rotate(Math.toRadians(1), Math.toRadians(1), Math.toRadians(0));
 		updateProjectedPoints();		
 	}
 	
@@ -89,10 +94,10 @@ public class Shape3D {
 			Point2D p1 = points2D[i];
 	        poly.addPoint((int)p1.getX(), (int)p1.getY());
 		}
-		g.setColor(Color.GRAY);	
+		g.setColor(fillColor);	
 		if (fill)
 			g.fillPolygon(poly);
-		g.setColor(Color.blue);	
+		g.setColor(outlineColor);	
 		g.setStroke(new BasicStroke(2));
 		g.drawPolygon(poly);
 	}	
